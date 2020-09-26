@@ -1,0 +1,25 @@
+<div class="box">
+  <mat-accordion>
+    <mat-expansion-panel *ngFor="let demo of demos" (opened)="showVideo(demo)">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          {{ demo.description }}
+        </mat-panel-title>
+        <mat-panel-description> </mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <div class="trailer" style="align-content: center;">
+        <div [innerHtml]="yt_iframe_html"></div>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>
+
+<ngx-spinner
+  bdColor="rgba(40,23,72,0.8)"
+  size="medium"
+  color="#fff"
+  type="ball-clip-rotate-multiple"
+>
+  <p style="font-size: 20px; color: white">{{ spinnerText }}</p>
+</ngx-spinner>

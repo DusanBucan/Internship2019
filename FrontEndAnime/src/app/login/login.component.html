@@ -1,0 +1,73 @@
+<div class="login-wrapper" fxLayout="row" fxLayoutAlign="center center">
+  <mat-card class="box">
+    <mat-card-header>
+      <mat-card-title>Log in</mat-card-title>
+    </mat-card-header>
+
+    <form class="example-form" (ngSubmit)="onLogin(f)" #f="ngForm">
+      <mat-card-content>
+        <mat-form-field class="example-full-width">
+          <input
+            type="email"
+            id="email"
+            name="email"
+            ngModel
+            required
+            email
+            #email="ngModel"
+            matInput
+            placeholder="Email"
+            [ngClass]="{
+              'is-invalid':
+                error?.email ||
+                (email.invalid && (email.dirty || email.touched))
+            }"
+          />
+        </mat-form-field>
+
+        <div
+          class="invalid-feedback"
+          *ngIf="email.invalid && (email.dirty || email.touched)"
+        >
+          Please enter email!
+        </div>
+
+        <mat-form-field class="example-full-width">
+          <input
+            matInput
+            placeholder="Password"
+            type="password"
+            id="password"
+            name="password"
+            ngModel
+            required
+            #password="ngModel"
+            [ngClass]="{
+              'is-invalid':
+                error?.password ||
+                (password.invalid && (password.dirty || password.touched))
+            }"
+          />
+        </mat-form-field>
+        <div
+          class="invalid-feedback"
+          *ngIf="password.invalid && (password.dirty || password.touched)"
+        >
+          Please enter password!
+        </div>
+        <p *ngIf="error" class="error">
+          {{ error }}
+        </p>
+      </mat-card-content>
+      <button
+        type="submit"
+        mat-stroked-button
+        color="accent"
+        class="btn-block"
+        [disabled]="!f.valid"
+      >
+        Log in
+      </button>
+    </form>
+  </mat-card>
+</div>

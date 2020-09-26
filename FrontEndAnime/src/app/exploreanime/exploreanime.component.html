@@ -1,0 +1,176 @@
+<div>
+  <div class="login-wrapper" fxLayout="row" fxLayoutAlign="center center">
+    <mat-card class="box">
+      <mat-card-header>
+        <mat-card-title>Discover Anime</mat-card-title>
+      </mat-card-header>
+
+      <mat-form-field id="search">
+        <mat-label>filter</mat-label>
+        <mat-select #filter value="null">
+          <mat-option value="anime">anime</mat-option>
+          <mat-option value="character">character</mat-option>
+          <mat-option value="person">person</mat-option>
+          <mat-option value="random">random</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field id="param" class="example-full-width">
+        <input
+          #searchParam
+          matInput
+          placeholder="Search anime"
+          (keydown.enter)="SearchAnimeOnline(searchParam, filter)"
+        />
+      </mat-form-field>
+    </mat-card>
+  </div>
+
+  <h1
+    *ngIf="topAnimes.length > 0"
+    style="margin-left: 25px; color: white; font-family: Roboto,'Helvetica Neue',sans-serif;"
+  >
+    Top rated:
+  </h1>
+
+  <div fxLayout="row wrap" fxLayoutAlign="flex-start" fxLayoutGap="18px">
+    <mat-card
+      class="example-card1"
+      fxFlex="0 1 calc(33.3% - 18px)"
+      *ngFor="let anime of topAnimes"
+    >
+      <mat-card-header>
+        <mat-card-title>
+          <a href="{{ anime?.url }}" target="_blank">
+            {{ anime.title }}
+          </a>
+        </mat-card-title>
+        <mat-card-subtitle style="padding-left: 15px;" class="fut2">
+          score: {{ anime?.score }}
+        </mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <img
+          src="{{ anime?.image_url }}"
+          alt="anime image"
+          style="width: 90%; height: 450px; margin-left: 0px;"
+        />
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <!---iznad su kartice za top anime-->
+
+  <div fxLayout="row wrap" fxLayoutAlign="flex-start" fxLayoutGap="18px">
+    <mat-card
+      class="example-card"
+      fxFlex="0 1 calc(33.3% - 18px)"
+      *ngFor="let anime of animes"
+    >
+      <mat-card-header>
+        <mat-card-title>
+          <ng-template
+            [ngIf]="filterParam === 'anime' || filterParam === 'random'"
+          >
+            <a href="{{ anime?.url }}" target="_blank">
+              {{ anime.title }}
+            </a>
+          </ng-template>
+        </mat-card-title>
+      </mat-card-header>
+
+      <mat-card-header>
+        <mat-card-title>
+          <ng-template [ngIf]="filterParam === 'person'">
+            {{ anime.name }}
+          </ng-template>
+        </mat-card-title>
+      </mat-card-header>
+
+      <mat-card-header>
+        <mat-card-title>
+          <ng-template [ngIf]="filterParam === 'character'">
+            {{ anime.name }}
+          </ng-template>
+        </mat-card-title>
+      </mat-card-header>
+
+      <img mat-card-image src="{{ anime?.image_url }}" alt="anime image" />
+
+      <mat-card-header>
+        <mat-card-subtitle
+          ><ng-template
+            [ngIf]="filterParam === 'anime' || filterParam === 'random'"
+          >
+            episodes: {{ anime?.episodes }}
+          </ng-template>
+        </mat-card-subtitle>
+
+        <mat-card-subtitle>
+          <ng-template [ngIf]="filterParam === 'character'">
+            <p *ngFor="let an of anime.anime | slice: 0:3">
+              {{ an.name }}
+            </p>
+
+            {{ anime?.synopsis }}
+          </ng-template>
+        </mat-card-subtitle>
+
+        <mat-card-subtitle
+          *ngIf="filterParam === 'anime' || filterParam === 'random'"
+        >
+          score: {{ anime?.score }}
+        </mat-card-subtitle>
+      </mat-card-header>
+
+      <mat-card-content
+        *ngIf="filterParam === 'anime' || filterParam === 'random'"
+      >
+        {{ anime?.synopsis }}
+      </mat-card-content>
+
+      <mat-card-footer style="padding-left: 20px;">
+        <mat-card-actions
+          *ngIf="filterParam === 'anime' || filterParam === 'random'"
+          layout="row"
+        >
+          <mat-form-field
+            *ngIf="filterParam === 'anime' || filterParam === 'random'"
+          >
+            <mat-label>Add to list</mat-label>
+            <mat-select
+              *ngIf="filterParam === 'anime' || filterParam === 'random'"
+              (selectionChange)="addToList($event, anime)"
+              class="add"
+            >
+              <mat-option>None</mat-option>
+              <mat-option *ngFor="let list of userList" [value]="list.name">{{
+                list.name
+              }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </mat-card-actions>
+      </mat-card-footer>
+
+      <mat-card-footer id="cpfooter">
+        <mat-card-actions
+          *ngIf="filterParam === 'character' || filterParam === 'person'"
+          layout="row"
+        >
+          <a href="{{ anime.url }}" target="_blank">
+            Load more...
+          </a>
+        </mat-card-actions>
+      </mat-card-footer>
+    </mat-card>
+  </div>
+</div>
+
+<ngx-spinner
+  bdColor="rgba(40,23,72,0.8)"
+  size="medium"
+  color="#fff"
+  type="ball-clip-rotate-multiple"
+>
+  <p style="font-size: 20px; color: white">{{ spinnerText }}</p>
+</ngx-spinner>

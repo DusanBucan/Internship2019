@@ -1,0 +1,112 @@
+.my-card {
+  color: #341773;
+  margin: 0px 300px 0px 300px;
+  opacity: 0.95;
+  padding: 30px 90px 20px 90px;
+}
+
+.my-card1 {
+  color: #341773;
+  margin: 0px 300px 0px 300px;
+  opacity: 0.95;
+  padding: 30px 90px 20px 90px;
+}
+
+.mat-form-field {
+  padding-top: 10px;
+  float: left;
+}
+
+#profileImage {
+  padding-top: 10px;
+  width: 200px;
+  //height: 400px;
+  float: right;
+  margin-left: 20px;
+  border-radius: 50%;
+}
+
+#name,
+#email,
+#address,
+#bio {
+  width: 100%;
+}
+
+#changePass:hover {
+  background-color: #a878ff;
+}
+
+#uploadImage,
+#changePass,
+#updateProfile {
+  margin-right: 5px;
+  margin-left: 5px;
+}
+
+#name,
+#email,
+#address,
+#bio {
+  float: left;
+}
+
+#table {
+  width: 700px;
+  height: 410px;
+}
+
+.buttons {
+  width: 600px;
+  padding-bottom: 20px;
+}
+
+.settings-card {
+  padding-top: 120px;
+}
+
+.invalid-feedback {
+  font-size: 10px;
+  color: red;
+  text-align: initial;
+  padding-top: 10px;
+}
+
+.mat-grid-tile {
+  text-align: left;
+  align-items: left;
+
+  margin-left: 0px;
+
+  float: left;
+}
+
+.zaliste {
+  text-align: left;
+  align-items: left;
+  width: 150px;
+  height: 200px;
+  float: left;
+  //overflow: block;
+  margin: 20px 20px 20px;
+}
+
+.pic {
+  overflow: block;
+  width: 250px;
+  height: 550px;
+}
+
+.example-card {
+  max-width: 300px;
+}
+
+mat-card img {
+  object-fit: cover; /*this makes de image in src fit to the size of specified below*/
+  width: 100%; /* Here you can use wherever you want to specify the width and also the height of the <img>*/
+  max-height: 275px;
+  float: left;
+  clear: both;
+  margin-right: 10px;
+  margin-left: 5px;
+}

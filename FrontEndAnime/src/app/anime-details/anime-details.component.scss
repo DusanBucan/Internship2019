@@ -1,0 +1,99 @@
+.example-card {
+  max-width: 1400px;
+  margin-left: 10%;
+  padding-top: 95px;
+  border-radius: 15px;
+}
+
+.buttonPressed {
+  border-style: inset;
+}
+
+.buttonPressed:hover {
+  background-color: #444b42;
+}
+
+mat-card img {
+  object-fit: cover;
+  width: 20%;
+  max-height: 175px;
+  float: left;
+  clear: both;
+  margin-right: 10px;
+  margin-left: 5px;
+}
+
+.mat-card {
+  max-width: 1400px;
+  max-height: 1200px;
+  flex-direction: column;
+  display: flex;
+}
+
+.mat-card-footer {
+  border-radius: 15px;
+  text-align: justify;
+  text-align: end;
+  flex-grow: 1;
+  overflow: auto;
+  font-size: 12px;
+  color: #737373;
+  max-width: 1500px;
+  max-height: 800px;
+  padding-right: 8px;
+}
+
+.mat-card-content {
+  padding-left: 5px;
+  text-align: justify;
+  flex-grow: 1;
+}
+
+.report {
+  text-align: right;
+  float: right;
+  align-content: bottom;
+}
+
+.myclass {
+  background-color: #673ab7;
+  color: white;
+}
+
+p {
+  font-size: 18px;
+  text-align: left;
+  padding-left: 10px;
+}
+
+h5 {
+  padding-left: 10px;
+  text-align: left;
+  font-size: 18px;
+  //margin-top: 150px;
+}
+
+#scrollArea {
+  max-width: 1400px;
+  margin-right: 5px;
+  overflow: auto;
+  border-radius: 15px;
+}
+
+a {
+  width: 330px;
+  height: 330px;
+}
+
+.dot {
+  outline-style: dotted;
+}
+
+.tweet {
+  width: 200px;
+  height: 200px;
+}
+
+.trailer {
+  padding: 50px 330px 50px 250px;
+}

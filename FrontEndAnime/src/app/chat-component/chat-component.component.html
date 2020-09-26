@@ -1,0 +1,69 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav
+    #drawer
+    class="sidenav"
+    fixedInViewport="true"
+    [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+    [mode]="(isHandset$ | async) ? 'over' : 'side'"
+    [opened]="!(isHandset$ | async)"
+  >
+    <mat-nav-list>
+      <mat-toolbar-row class="prvi">
+        Online users: {{ userList.length }}
+      </mat-toolbar-row>
+
+      <mat-toolbar-row *ngFor="let user of userList">
+        <a mat-list-item (click)="showConversation(user)">{{
+          user.email
+        }}</a></mat-toolbar-row
+      >
+    </mat-nav-list>
+  </mat-sidenav>
+</mat-sidenav-container>
+<div class="searchForm">
+  <h4 *ngIf="selecedUser.email !== ''" class="chat-title">
+    Chating with: {{ selecedUser?.email }}
+  </h4>
+
+  <div id="scrollArea">
+    <table
+      *ngIf="selecedUser.email !== ''"
+      mat-table
+      [dataSource]="dataSource"
+      class="mat-elevation-z8;example-container"
+    >
+      <ng-container matColumnDef="User">
+        <th mat-header-cell *matHeaderCellDef>
+          <p>{{ selecedUser?.email }}</p>
+        </th>
+        <td mat-cell *matCellDef="let element">
+          <p class="chat-bubble1">
+            {{ element.heSay }}
+          </p>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="Me">
+        <th mat-header-cell *matHeaderCellDef style="text-align: right">me</th>
+        <td mat-cell *matCellDef="let element">
+          <p class="chat-bubble">{{ element.meSay }}</p>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+  </div>
+  <form>
+    <input
+      *ngIf="showInput"
+      #messageInput
+      matInput
+      placeholder="Enter message"
+      (keydown.enter)="sendMessage(messageInput.value, messageInput)"
+      class="message-input"
+    />
+  </form>
+
+  <div class="bg"></div>
+</div>

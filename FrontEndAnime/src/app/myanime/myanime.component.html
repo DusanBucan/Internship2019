@@ -1,0 +1,148 @@
+<mat-sidenav-container
+  class="sidenav-container"
+  *ngIf="authService.isAuthenticated()"
+>
+  <mat-sidenav
+    #drawer
+    class="sidenav"
+    fixedInViewport="true"
+    [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+    [mode]="(isHandset$ | async) ? 'over' : 'side'"
+    [opened]="!(isHandset$ | async)"
+  >
+    <mat-toolbar>Menu</mat-toolbar>
+    <mat-nav-list>
+      <button mat-button data-target="#addlist" (click)="onAddList(row)">
+        <em class="material-icons">
+          add_circle_outline
+        </em>
+      </button>
+
+      <a
+        mat-list-item
+        *ngFor="let list of lists"
+        (click)="onListSelect(list.name)"
+      >
+        <mat-toolbar-row>
+          <md-button
+            class="md-icon-button"
+            color="warn"
+            (click)="onListDelete(list.name)"
+          >
+            <mat-icon
+              _ngcontent-aiy-c7
+              class="mat-icon notranslate material-cons mat-icon-nocolor"
+              role="img"
+              aria-hidden="true"
+              >delete_outline</mat-icon
+            ></md-button
+          >
+
+          <div style="padding-left: 10px">{{ list.name }}</div>
+        </mat-toolbar-row>
+      </a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content> </mat-sidenav-content
+></mat-sidenav-container>
+
+<!--pocinje filter-->
+
+<div *ngIf="animes.length > 0" class="sortOptions">
+  <button id="mainbutton" mat-button [matMenuTriggerFor]="sortby">
+    <strong>SORT BY</strong>
+  </button>
+
+  <mat-menu #sortby="matMenu">
+    <button mat-menu-item (click)="setSort('title')">Title</button>
+    <button mat-menu-item (click)="setSort('rating')">Rating</button>
+    <button mat-menu-item (click)="setSort('commentsNumber')">
+      Comments number
+    </button>
+  </mat-menu>
+
+  <button mat-button id="mainbutton" [matMenuTriggerFor]="Type">
+    <strong>TYPE</strong>
+  </button>
+  <mat-menu #Type="matMenu">
+    <button mat-menu-item (click)="setType('asc')">Ascending</button>
+    <button mat-menu-item (click)="setType('desc')">Descending</button>
+  </mat-menu>
+
+  <button mat-button id="mainbutton" [matMenuTriggerFor]="Filter">
+    <strong>FILTER</strong>
+  </button>
+  <mat-menu #Filter="matMenu">
+    <button mat-menu-item (click)="setFilter(null, null)">None</button>
+    <button mat-menu-item (click)="setFilter('title', value)">
+      Title
+    </button>
+  </mat-menu>
+
+  <!--input za filter-->
+
+  <mat-form-field
+    *ngIf="filter === 'title'"
+    id="filterTitle"
+    fxFlex="50%"
+    style="margin-left: 50px"
+  >
+    <input matInput type="text" placeholder="Title" [(ngModel)]="value" />
+  </mat-form-field>
+</div>
+
+<div>
+  <div
+    *ngIf="animes && animes.length > 0"
+    fxLayout="row wrap"
+    fxLayoutAlign="flex-start"
+    fxLayoutGap="18px"
+    class="div2"
+  >
+    <mat-card
+      *ngFor="
+        let anime of animes
+          | filterAnimes: filter:value
+          | sortAnimes: sortBy:type
+      "
+      class="example-card"
+      fxFlex="0 1 calc(33.3% - 18px)"
+    >
+      <mat-card-header>
+        <mat-card-title (click)="showAnimeDetails(anime)">
+          <md-button>{{ anime.title }}</md-button></mat-card-title
+        >
+      </mat-card-header>
+
+      <img mat-card-image src="{{ anime?.coverImages }}" alt="anime image" />
+
+      <mat-card-header>
+        <mat-card-subtitle> episodes: {{ anime?.episodes }} </mat-card-subtitle>
+      </mat-card-header>
+
+      <mat-card-header>
+        <mat-card-subtitle> score: {{ anime?.malScore }} </mat-card-subtitle>
+      </mat-card-header>
+
+      <mat-card-content>
+        {{ anime?.synopsis }}
+      </mat-card-content>
+
+      <mat-card-footer>
+        <md-button
+          class="md-icon-button"
+          color="warn"
+          (click)="onAnimaDeleteFromList(anime)"
+        >
+          <mat-icon
+            _ngcontent-aiy-c7
+            class="mat-icon notranslate material-cons mat-icon-nocolor"
+            role="img"
+            aria-hidden="true"
+            >delete_outline</mat-icon
+          ></md-button
+        >
+      </mat-card-footer>
+    </mat-card>
+  </div>
+</div>

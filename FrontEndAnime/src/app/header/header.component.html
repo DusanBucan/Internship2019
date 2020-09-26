@@ -1,0 +1,90 @@
+<mat-toolbar color="primary" class="app-header">
+  <span class="nav-tool-items">
+    <ng-template [ngIf]="authService.isAuthenticated()">
+      <a mat-button routerLink="myAnime" routerLinkActive="active">MyAnime</a>
+      <a mat-button routerLink="exploreAnime" routerLinkActive="active"
+        >Explore anime</a
+      >
+    </ng-template>
+
+    <ng-template id="community-menu" [ngIf]="authService.isAuthenticated()">
+      <button mat-button [matMenuTriggerFor]="menu">Community</button>
+      <mat-menu #menu="matMenu">
+        <a mat-button routerLink="animes" routerLinkActive="active">Animes</a>
+        <a mat-button routerLink="members" routerLinkActive="active">Users</a>
+        <a mat-button routerLink="chat/." routerLinkActive="active">Chat</a>
+      </mat-menu>
+    </ng-template>
+
+    <ng-template
+      [ngIf]="
+        authService.isAuthenticated() &&
+        notificationService.notificationCounter !== 0
+      "
+    >
+      <button mat-icon-button [matMenuTriggerFor]="appMenu">
+        <mat-icon
+          [matBadge]="notificationService.notificationCounter"
+          matBadgeColor="accent"
+          >home</mat-icon
+        >
+      </button>
+    </ng-template>
+
+    <ng-template
+      [ngIf]="
+        authService.isAuthenticated() &&
+        notificationService.notificationCounter == 0
+      "
+    >
+      <button mat-icon-button [matMenuTriggerFor]="appMenu">
+        <mat-icon matBadgeColor="accent">home</mat-icon>
+      </button>
+    </ng-template>
+
+    <span class="example-fill-remaining-space"></span>
+
+    <ng-template [ngIf]="!authService.isAuthenticated()">
+      <a mat-button routerLink="login" routerLinkActive="active" class="right"
+        >Log in</a
+      >
+      <a mat-button routerLink="register" routerLinkActive="active">Register</a>
+    </ng-template>
+
+    <ng-template [ngIf]="authService.isAuthenticated()">
+      <a
+        mat-button
+        id="logout"
+        routerLinkActive="active"
+        (click)="authService.logout()"
+        >Log out</a
+      >
+      <a mat-button (click)="goToProfil()"
+        ><i class="material-icons">
+          account_circle
+        </i></a
+      >
+      <a mat-button (click)="goToDemo()"
+        ><i class="material-icons">
+          help
+          </i></a
+      >
+    </ng-template>
+  </span>
+</mat-toolbar>
+
+<!--meni sa notifikacijama-->
+<mat-menu #appMenu="matMenu">
+  <button
+    [ngStyle]="{
+      'background-color': notification.seen ? 'white' : '#673ab7',
+      color: notification.seen ? '#673ab7' : 'white'
+    }"
+    mat-menu-item
+    *ngFor="let notification of notificationService.userNotifations"
+    (click)="procesNotification(notification)"
+    class="noti"
+  >
+    {{ notification.message }}
+  </button>
+</mat-menu>

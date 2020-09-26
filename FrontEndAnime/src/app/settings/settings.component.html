@@ -1,0 +1,275 @@
+<ng-module *ngIf="isMe">
+  <div class="settings-card">
+    <mat-card class="my-card">
+      <mat-card-header>
+        <mat-card-title
+          ><h3><strong>Settings</strong></h3></mat-card-title
+        >
+      </mat-card-header>
+
+      <mat-card-content class="row">
+        <img
+          class="column"
+          src="{{ user.image?.url }}"
+          id="profileImage"
+          alt="user image"
+        />
+
+        <input
+          #fileInput
+          type="file"
+          style="display:none"
+          (change)="onImageSelected($event)"
+        />
+
+        <mat-tab-group class="column">
+          <mat-tab label="General Informations">
+            <table style="width: 50%" cellspacing="10" id="table">
+              <tr>
+                <td>
+                  <mat-form-field>
+                    <mat-label>Username</mat-label>
+                    <input
+                      id="name"
+                      matInput
+                      placeholder="Name"
+                      [(ngModel)]="user.name"
+                      name="name"
+                      required
+                      [disabled]="!isMe"
+                    />
+                    <div *ngIf="error" class="invalid-feedback">
+                      {{ error?.name }}
+                    </div>
+                  </mat-form-field>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <mat-form-field>
+                    <mat-label>E-mail</mat-label>
+                    <input
+                      id="email"
+                      name="email"
+                      matInput
+                      placeholder="Email"
+                      [(ngModel)]="user.email"
+                      name="email"
+                      required
+                      [disabled]="true"
+                    />
+                  </mat-form-field>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <mat-form-field id="address">
+                    <mat-label>Address</mat-label>
+                    <textarea
+                      id="address"
+                      matInput
+                      [(ngModel)]="user.address"
+                      [disabled]="!isMe"
+                    ></textarea>
+                  </mat-form-field>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <mat-form-field id="bio">
+                    <textarea
+                      matInput
+                      [(ngModel)]="user.bio"
+                      placeholder="Bio"
+                      [disabled]="!isMe"
+                    ></textarea>
+                  </mat-form-field>
+                </td>
+              </tr>
+            </table>
+          </mat-tab>
+        </mat-tab-group>
+      </mat-card-content>
+
+      <mat-card-actions>
+        <!-- Actions go here -->
+      </mat-card-actions>
+      <div *ngIf="isMe"></div>
+      <div class="buttons">
+        <button
+          id="updateProfile"
+          mat-button
+          style="background-color: #673ab7; color: #ffffff"
+          (click)="updateProfile()"
+        >
+          <strong>Update Settings</strong>
+        </button>
+        <button
+          mat-button
+          [routerLink]="['/changepassword']"
+          id="changePass"
+          style="background-color: #673ab7; color: #ffffff"
+        >
+          <strong>Change Password</strong>
+        </button>
+
+        <button
+          mat-button
+          id="uploadImage"
+          (click)="fileInput.click()"
+          style="background-color: #673ab7; color: #ffffff"
+        >
+          <strong>Upload Image</strong>
+        </button>
+      </div>
+
+      <!--Plajliste-->
+      <h2 style="text-align: left;" *ngIf="lists.length > 0">
+        Playlists:
+      </h2>
+
+      <div fxLayout="row wrap" fxLayoutAlign="flex-start" fxLayoutGap="18px">
+        <mat-card
+          class="example-card"
+          (click)="onListSelect(list.name)"
+          fxFlex="0 1 calc(33.3% - 18px)"
+          *ngFor="let list of lists"
+        >
+          <mat-card-content>
+            <h3 style="text-align: center;">
+              {{ list.name }}
+            </h3>
+            <img class="pic" src="{{ list.image }}" alt="user image" />
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </mat-card>
+  </div>
+</ng-module>
+
+<ng-module *ngIf="!isMe">
+  <div class="settings-card">
+    <mat-card class="my-card">
+      <mat-card-header>
+        <mat-card-title
+          ><h3>
+            <strong>Profile of {{ user.email }}</strong>
+          </h3></mat-card-title
+        >
+      </mat-card-header>
+
+      <mat-card-content class="row">
+        <img
+          class="column"
+          src="{{ user.image?.url }}"
+          id="profileImage"
+          alt="user image"
+        />
+
+        <input
+          #fileInput
+          type="file"
+          style="display:none"
+          (change)="onImageSelected($event)"
+        />
+
+        <mat-tab-group class="column">
+          <mat-tab label="General Information">
+            <table style="width: 50%" cellspacing="10" id="table">
+              <tr>
+                <td>
+                  <mat-form-field>
+                    <mat-label>Username</mat-label>
+                    <input
+                      id="name"
+                      matInput
+                      placeholder="Name"
+                      [(ngModel)]="user.name"
+                      name="name"
+                      required
+                      [disabled]="!isMe"
+                    />
+                    <div *ngIf="error" class="invalid-feedback">
+                      {{ error?.name }}
+                    </div>
+                  </mat-form-field>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <mat-form-field>
+                    <mat-label>E-mail</mat-label>
+                    <input
+                      id="email"
+                      name="email"
+                      matInput
+                      placeholder="Email"
+                      [(ngModel)]="user.email"
+                      name="email"
+                      required
+                      [disabled]="true"
+                    />
+                  </mat-form-field>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <mat-form-field id="address">
+                    <mat-label>Address</mat-label>
+                    <textarea
+                      id="address"
+                      matInput
+                      [(ngModel)]="user.address"
+                      [disabled]="!isMe"
+                    ></textarea>
+                  </mat-form-field>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <mat-form-field id="bio">
+                    <textarea
+                      matInput
+                      [(ngModel)]="user.bio"
+                      placeholder="Bio"
+                      [disabled]="!isMe"
+                    ></textarea>
+                  </mat-form-field>
+                </td>
+              </tr>
+            </table>
+          </mat-tab>
+        </mat-tab-group>
+      </mat-card-content>
+      <!--Plajliste-->
+      <h2 style="text-align: left;" *ngIf="lists.length > 0">
+        Playlists:
+      </h2>
+
+      <div fxLayout="row wrap" fxLayoutAlign="flex-start" fxLayoutGap="18px">
+        <mat-card
+          class="example-card"
+          (click)="onListSelect(list.name)"
+          fxFlex="0 1 calc(33.3% - 18px)"
+          *ngFor="let list of lists"
+        >
+          <mat-card-content>
+            <h3 style="text-align: center;">
+              {{ list.name }}
+            </h3>
+            <img class="pic" src="{{ list.image }}" alt="user image" />
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </mat-card>
+  </div>
+</ng-module>
+
+<ngx-spinner
+  bdColor="rgba(40,23,72,0.8)"
+  size="medium"
+  color="#fff"
+  type="ball-clip-rotate-multiple"
+>
+  <p style="font-size: 20px; color: white">{{ spinnerMessage }}</p>
+</ngx-spinner>

@@ -1,0 +1,98 @@
+<mat-card class="example-card">
+  <mat-card-header>
+    <div mat-card-avatar class="example-header-image"></div>
+    <mat-card-title>{{ anime?.title }}</mat-card-title>
+    <mat-card-subtitle>{{ listName }} by {{ userEmail }} </mat-card-subtitle>
+  </mat-card-header>
+  <img mat-card-image src="{{ anime?.coverImages }}" alt="Anime photo" />
+  <mat-card-content>
+    <p>
+      {{ anime?.synopsis }}
+    </p>
+  </mat-card-content>
+  <mat-card-actions>
+    <button
+      mat-button
+      (click)="
+        likeAnime(); likeButtonPresed = true; dislikeButtonPresed = false
+      "
+      [class.myclass]="likeButtonPresed"
+    >
+      <em class="material-icons"> thumb_up</em>
+      {{ numberOfLikes }}
+    </button>
+    <button
+      mat-button
+      (click)="
+        dislikeAnime(); dislikeButtonPresed = true; likeButtonPresed = false
+      "
+      [class.myclass]="dislikeButtonPresed"
+    >
+      <em class="material-icons">
+        thumb_down
+      </em>
+      {{ numberOfDislike }}
+    </button>
+    <button mat-button (click)="opetCommentDialog()">
+      <em class="material-icons">
+        mode_comment
+      </em>
+    </button>
+
+    <facebook-share-button [share]="shareObj"></facebook-share-button>
+
+    <tweet
+      class="tweet"
+      [url]="urlForShare"
+      text="What's on your mind?"
+      data-size="large"
+    ></tweet>
+  </mat-card-actions>
+  <mat-card-footer>
+    <mat-tab-group>
+      <mat-tab label="Comments">
+        <div id="scrollArea">
+          <!--svaki komentar je jedna card-->
+          <mat-card *ngFor="let comment of comments">
+            <mat-card-content>
+              <p>
+                {{ comment.content }}
+              </p>
+            </mat-card-content>
+            <mat-card-actions>
+              <div class="report">
+                <button mat-button (click)="reportComment(comment)">
+                  <em class="material-icons">
+                    report
+                  </em>
+                </button>
+              </div>
+              <button
+                *ngIf="isAdmin"
+                mat-button
+                (click)="removeComment(comment)"
+              >
+                Remove
+              </button>
+            </mat-card-actions>
+            <mat-card-footer>
+              by:
+              <cite title="Source Title">{{ comment.creator.name }}</cite
+              ><br />
+              date:
+              <cite title="Source Title">{{
+                comment.date | date: 'short'
+              }}</cite>
+            </mat-card-footer>
+          </mat-card>
+        </div>
+      </mat-tab>
+      <mat-tab label="Trailer">
+        <!--ovo se renderuje video dodaj ga gde hoces-->
+        <div class="trailer" style="align-content: center;">
+          <div [innerHtml]="yt_iframe_html"></div>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+  </mat-card-footer>
+</mat-card>

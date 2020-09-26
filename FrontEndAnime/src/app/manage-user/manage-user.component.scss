@@ -1,0 +1,121 @@
+table {
+  width: 100%;
+}
+
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
+td,
+th {
+  width: 25%;
+}
+
+.example-radio-group {
+  display: flex;
+  flex-direction: column;
+  margin: 15px 0;
+}
+
+.example-radio-button {
+  margin: 5px;
+}
+
+.scroll {
+  max-height: 145px;
+  overflow-y: auto;
+}
+
+div.col-md-4 {
+  width: 380px;
+  height: 377;
+}
+
+div.card-footer {
+  width: 348px;
+  height: 65px;
+}
+
+.card {
+  border-color: #444b42;
+  border-radius: 0.25rem;
+  color: #444b42;
+}
+
+@media (min-width: 768px) {
+  .bd-placeholder-img-lg {
+    font-size: 3.5rem;
+  }
+}
+
+div.modal-header {
+  background-color: #f6f8f6;
+}
+
+.btn.btn-primary {
+  text-align: center;
+  width: 55px;
+  height: 38px;
+  background-color: #f6f8f6;
+  border-color: #444b42;
+  margin-right: 2px;
+  margin-left: 2px;
+  color: #444b42;
+  font-family: serif;
+  font-size: 14px;
+}
+
+.btn.btn-secondary {
+  text-align: center;
+  width: 55px;
+  height: 38px;
+  color: #f6f8f6;
+  margin-right: 2px;
+  margin-left: 2px;
+  border-color: #444b42;
+  background-color: #444b42;
+  font-family: serif;
+  font-size: 14px;
+}
+
+.btn.btn-secondary:hover {
+  background-color: #ccd7c9;
+}
+
+.buttons {
+  padding: 10px 15px 10px 15px;
+}
+
+.radio {
+  padding: 10px 15px 10px 15px;
+}
+
+.form-group {
+  padding: 10px 10px 10px 10px;
+}
+
+div.mat-elevation-z8 {
+  width: 1500px;
+  margin-top: 50px;
+  margin-left: 160px;
+  border-radius: 8px;
+}
+
+#table {
+  border-radius: 8px;
+}
+
+.search-div {
+  margin-top: 70px;
+  margin-left: 450px;
+  margin-right: 370px;
+  padding-left: 30px;
+  padding-right: 30px;
+  color: #673ab7;
+  border-radius: 5px;
+  width: 850px;
+  height: 70px;
+  align-content: center;
+  background-color: #ffffff;
+}

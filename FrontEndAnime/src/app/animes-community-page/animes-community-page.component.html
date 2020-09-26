@@ -1,0 +1,58 @@
+<form class="searchForm">
+  <mat-form-field class="example-full-width">
+    <input
+      id="search"
+      #search
+      matInput
+      placeholder="Search animes of other users"
+      (keydown.enter)="searchLocal(search.value)"
+    />
+  </mat-form-field>
+</form>
+
+<div
+  fxLayout="row wrap"
+  fxLayoutAlign="flex-start"
+  fxLayoutGap="18px"
+  class="div2"
+>
+  <mat-card
+    class="example-card"
+    fxFlex="0 1 calc(33.3% - 18px)"
+    *ngFor="let user of users"
+  >
+    <mat-card-header>
+      <mat-card-title (click)="showAnimeDetails(user)"
+        >{{ user.anime.title }} by {{ user.name }} in play list
+        {{ user.list }}</mat-card-title
+      >
+    </mat-card-header>
+
+    <img mat-card-image src="{{ user.anime?.coverImages }}" alt="anime image" />
+
+    <mat-card-header>
+      <mat-card-subtitle>
+        episodes: {{ user.anime?.episodes }}
+      </mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-header>
+      <mat-card-subtitle> score: {{ user.anime?.malScore }} </mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content>
+      {{ user.anime?.synopsis }}
+    </mat-card-content>
+  </mat-card>
+</div>
+
+
+
+<ngx-spinner
+  bdColor="rgba(40,23,72,0.8)"
+  size="medium"
+  color="#fff"
+  type="ball-clip-rotate-multiple"
+>
+  <p style="font-size: 20px; color: white">{{ spinnerText }}</p>
+</ngx-spinner>

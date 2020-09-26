@@ -1,0 +1,84 @@
+<div *ngIf="animes.length > 0" class="sortOptions">
+  <button id="mainbutton" mat-button [matMenuTriggerFor]="sortby">
+    <strong>SORT BY</strong>
+  </button>
+
+  <mat-menu #sortby="matMenu">
+    <button mat-menu-item (click)="setSort('title')">Title</button>
+    <button mat-menu-item (click)="setSort('rating')">Rating</button>
+    <button mat-menu-item (click)="setSort('commentsNumber')">
+      Comments number
+    </button>
+  </mat-menu>
+
+  <button mat-button id="mainbutton" [matMenuTriggerFor]="Type">
+    <strong>TYPE</strong>
+  </button>
+  <mat-menu #Type="matMenu">
+    <button mat-menu-item (click)="setType('asc')">Ascending</button>
+    <button mat-menu-item (click)="setType('desc')">Descending</button>
+  </mat-menu>
+
+  <button mat-button id="mainbutton" [matMenuTriggerFor]="Filter">
+    <strong>FILTER</strong>
+  </button>
+  <mat-menu #Filter="matMenu">
+    <button mat-menu-item (click)="setFilter(null, null)">None</button>
+    <button mat-menu-item (click)="setFilter('title', value)">
+      Title
+    </button>
+  </mat-menu>
+
+  <!--input za filter-->
+
+  <mat-form-field
+    *ngIf="filter === 'title'"
+    id="filterTitle"
+    fxFlex="50%"
+    style="margin-left: 50px"
+  >
+    <input matInput type="text" placeholder="Title" [(ngModel)]="value" />
+  </mat-form-field>
+</div>
+
+<div>
+  <div
+    *ngIf="animes && animes.length > 0"
+    fxLayout="row wrap"
+    fxLayoutAlign="flex-start"
+    fxLayoutGap="18px"
+    class="div2"
+  >
+    <mat-card
+      *ngFor="
+        let anime of animes
+          | filterAnimes: filter:value
+          | sortAnimes: sortBy:type
+      "
+      class="example-card"
+      fxFlex="0 1 calc(33.3% - 18px)"
+    >
+      <mat-card-header>
+        <mat-card-title (click)="showAnimeDetails(anime)">
+          <md-button>{{ anime.title }}</md-button></mat-card-title
+        >
+      </mat-card-header>
+
+      <img mat-card-image src="{{ anime?.coverImages }}" alt="anime image" />
+
+      <mat-card-header>
+        <mat-card-subtitle> episodes: {{ anime?.episodes }} </mat-card-subtitle>
+      </mat-card-header>
+
+      <mat-card-header>
+        <mat-card-subtitle> score: {{ anime?.malScore }} </mat-card-subtitle>
+      </mat-card-header>
+
+      <mat-card-content>
+        {{ anime?.synopsis }}
+      </mat-card-content>
+
+      <mat-card-footer> </mat-card-footer>
+    </mat-card>
+  </div>
+</div>

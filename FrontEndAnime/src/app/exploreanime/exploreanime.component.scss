@@ -1,0 +1,81 @@
+.example-card {
+  max-width: 400px;
+}
+
+.example-card1 {
+  max-width: 350px;
+  max-height: 300px;
+  opacity: 0.9;
+}
+
+.example-header-image {
+  background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+  background-size: cover;
+}
+
+mat-card img {
+  object-fit: cover; /*this makes de image in src fit to the size of specified below*/
+  width: 30%; /* Here you can use wherever you want to specify the width and also the height of the <img>*/
+  max-height: 175px;
+  float: left;
+  clear: both;
+  margin-right: 10px;
+  margin-left: 5px;
+}
+
+.mat-card {
+  margin: 18px 18px 18px 18px;
+}
+
+.mat-card-footer {
+  width: 400px;
+  height: 70px;
+  float: right;
+  padding-top: 0px;
+  align-content: left;
+  text-align: left;
+}
+
+.mat-card {
+  width: 400px;
+  height: 450px;
+  display: flex;
+  flex-direction: column;
+}
+
+.mat-card-header {
+  max-height: 70px;
+  display: flex;
+  flex-direction: row;
+  flex-shrink: 0;
+  text-align: left;
+}
+
+.mat-card-content {
+  width: 360px;
+  height: 380px;
+  text-align: justify;
+  flex-grow: 1;
+  overflow: auto;
+}
+
+.box {
+  width: 350px;
+  height: 180px;
+  margin-top: 130px;
+}
+
+#cpfooter {
+  width: 400px;
+  height: 70px;
+  padding-top: 30px;
+  float: right;
+  margin-left: 5px;
+  text-align: left;
+  align-content: bottom;
+}
+
+a {
+  color: rgba(0, 0, 0, 0.87);
+  text-decoration: none;
+}

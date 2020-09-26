@@ -1,0 +1,8 @@
+<h1 mat-dialog-title>Delete {{ data.type }}: {{ data.name }}</h1>
+
+<div mat-dialog-actions>
+  <button mat-button (click)="onCancelDelete()">Cancel</button>
+  <button mat-button (click)="onDelete()" cdkFocusInitial>
+    Delete
+  </button>
+</div>

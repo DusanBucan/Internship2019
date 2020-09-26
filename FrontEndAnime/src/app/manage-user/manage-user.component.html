@@ -1,0 +1,73 @@
+<div class="search-div">
+  <mat-form-field>
+    <input
+      id="search"
+      matInput
+      (keyup.enter)="searchUser($event.target.value)"
+      placeholder="Search users"
+    />
+  </mat-form-field>
+</div>
+
+<div class="mat-elevation-z8">
+  <table id="table" mat-table [dataSource]="dataSource" matSort>
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+      <td mat-cell *matCellDef="let row">{{ row.name }}</td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="email">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Email</th>
+      <td mat-cell *matCellDef="let row">{{ row.email }}</td>
+    </ng-container>
+
+    <!-- Color Role -->
+    <ng-container matColumnDef="role">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Role</th>
+      <td mat-cell *matCellDef="let row" [style.color]="row.color">
+        {{ row?.role == 4 ? 'admin' : 'user' }}
+      </td>
+    </ng-container>
+
+    <!-- Details, Remove buttons -->
+    <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef></mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        <button *ngIf="isAdmin()" mat-icon-button (click)="onBlockClick(row)">
+          <em *ngIf="!isBlocked(row)" class="material-icons">
+            lock_open
+          </em>
+
+          <em *ngIf="isBlocked(row)" class="material-icons">
+            lock
+          </em>
+        </button>
+        <button
+          *ngIf="isAdmin()"
+          mat-icon-button
+          color="warn"
+          (click)="onDeleteUser(row)"
+          data-toggle="modal"
+          data-target="#deleteCategoryModal"
+        >
+          <mat-icon>delete_outline</mat-icon>
+        </button>
+        <button mat-icon-button color="warn" (click)="userDetails(row)">
+          <mat-icon>account_box</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+
+  <mat-paginator
+    [pageSizeOptions]="[5, 10, 25, 100]"
+    pageSize="5"
+    [length]="totalSize"
+    (page)="populateDataSource($event)"
+  ></mat-paginator>
+</div>

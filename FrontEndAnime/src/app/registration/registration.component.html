@@ -1,0 +1,146 @@
+<div class="login-wrapper" fxLayout="row" fxLayoutAlign="center center">
+  <mat-card class="box">
+    <mat-card-header>
+      <mat-card-title>Register</mat-card-title>
+    </mat-card-header>
+
+    <form class="example-form" (ngSubmit)="onRegister(f)" #f="ngForm">
+      <mat-card-content>
+        <mat-form-field class="example-full-width">
+          <input
+            matInput
+            placeholder="Username"
+            class="form-control"
+            type="text"
+            id="name"
+            name="name"
+            ngModel
+            required
+            #name="ngModel"
+            [ngClass]="{
+              'is-invalid':
+                error?.name || (name.invalid && (name.dirty || name.touched))
+            }"
+          />
+
+          <div
+            class="invalid-feedback"
+            *ngIf="name.invalid && (name.dirty || name.touched)"
+          >
+            Please enter your name!
+          </div>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+          <input
+            matInput
+            placeholder="Email"
+            type="email"
+            id="email"
+            name="email"
+            ngModel
+            required
+            email
+            #email="ngModel"
+            [ngClass]="{
+              'is-invalid':
+                error?.email ||
+                (email.invalid && (email.dirty || email.touched))
+            }"
+          />
+          <div
+            class="invalid-feedback"
+            *ngIf="email.invalid && (email.dirty || email.touched)"
+          >
+            Please enter correct email!
+          </div>
+          <div *ngIf="error?.email" class="invalid-feedback">
+            {{ error.email }}
+          </div>
+        </mat-form-field>
+
+        <!--kraj email-->
+
+        <mat-form-field class="example-full-width">
+          <input
+            matInput
+            placeholder="Password"
+            type="password"
+            id="password"
+            name="password"
+            ngModel
+            required
+            minlength="6"
+            #password="ngModel"
+            [ngClass]="{
+              'is-invalid':
+                error?.password ||
+                (password.invalid && (password.dirty || password.touched))
+            }"
+          />
+          <div
+            class="invalid-feedback"
+            *ngIf="password.invalid && (password.dirty || password.touched)"
+          >
+            Please enter password with at least 6 characters!
+          </div>
+          <div *ngIf="error?.password" class="invalid-feedback">
+            {{ error.password }}
+          </div>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+          <input
+            matInput
+            placeholder="Confirm Password"
+            type="password"
+            id="password2"
+            name="password2"
+            ngModel
+            required
+            #password2="ngModel"
+            [ngClass]="{
+              'is-invalid':
+                error?.password2 ||
+                (password2.invalid && (password2.dirty || password2.touched))
+            }"
+          />
+          <div
+            class="invalid-feedback"
+            *ngIf="password2.invalid && (password2.dirty || password2.touched)"
+          >
+            Please enter conformation password!
+          </div>
+          <div *ngIf="error?.password2" class="invalid-feedback">
+            {{ error.password2 }}
+          </div>
+        </mat-form-field>
+
+        <!--generalne poruke o registraciji!!!-->
+        <div class="alert alert-danger" *ngIf="error">
+          Failed to register user!
+        </div>
+        <div class="alert alert-success" *ngIf="success">
+          You have successfully registered!
+        </div>
+      </mat-card-content>
+
+      <button
+        *ngIf="responseCode"
+        mat-stroked-button
+        color="accent"
+        class="btn-block"
+        type="submit"
+        [disabled]="!f.valid"
+      >
+        Register
+      </button>
+      <div *ngIf="!responseCode">
+        <re-captcha
+          (resolved)="resolved($event)"
+          siteKey="6Ld_UrMUAAAAAMcaqMZu-oOSK-an0YMvC_Jk2bZj"
+        ></re-captcha>
+      </div>
+    </form>
+  </mat-card>
+</div>
