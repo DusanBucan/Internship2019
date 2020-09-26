@@ -1,0 +1,3 @@
+[submodule "WebSocketServerAnime"]
+	path = WebSocketServerAnime
+	url = https://github.com/DusanBucan/WebSocketServerAnime.git
