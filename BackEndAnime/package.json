@@ -1,0 +1,49 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "backEnd api",
+  "main": "server.js",
+  "scripts": {
+    "test": "mocha ./routes/api-test --timeout 15000 --exit",
+    "server": "nodemon server.js",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://sara_popov@bitbucket.org/sara_popov/myanime.git"
+  },
+  "dependencies": {
+    "@angular/cli": "^8.0.2",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
+    "cloudinary": "^1.15.0",
+    "cross-fetch": "^3.0.4",
+    "crypto-random-string": "^3.0.1",
+    "express": "^4.17.1",
+    "gmail-send": "^1.8.10",
+    "is-isbn": "^1.1.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.6.5",
+    "multer": "^1.4.2",
+    "multer-storage-cloudinary": "^2.2.1",
+    "nodemailer": "^6.3.0",
+    "passport": "^0.4.0",
+    "passport-jwt": "^4.0.0",
+    "promise-foreach": "^1.0.23",
+    "pug": "^2.0.4",
+    "request": "^2.88.0",
+    "validator": "^11.1.0"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "chai-http": "^4.3.0",
+    "mocha": "^6.2.0",
+    "nodemon": "^1.19.1",
+    "supertest": "^4.0.2"
+  },
+  "engines": {
+    "node": "10.x"
+  },
+  "author": "",
+  "license": "ISC"
+}
